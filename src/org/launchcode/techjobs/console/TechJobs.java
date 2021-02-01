@@ -9,6 +9,7 @@ import java.util.Scanner;
  */
 public class TechJobs {
 
+    // Class Variables
     private static Scanner in = new Scanner(System.in);
 
     public static void main (String[] args) {
@@ -51,21 +52,28 @@ public class TechJobs {
                     }
                 }
 
-            } else { // choice is "search"
+            } else if (actionChoice.equals("search")){ // choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
-                String searchField = getUserSelection("Search by:", columnChoices);
+                String searchField = getUserSelection("Search by:", columnChoices
+                );
 
                 // What is their search term?
                 System.out.println("\nSearch term: ");
                 String searchTerm = in.nextLine();
 
+
+
+                //if all is selected, the field is not yet set up so it will print ......
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not yet implemented.");
+                    printJobs(JobData.findByValue(searchTerm));
+                    //System.out.println("Search all fields not yet implemented.");
+                    //if 1-4 selected, it will print the jobs based on searchField and searchTerm
                 } else {
+                    //printJobs will print the arrayList returned from JobData the searchField and searchTerm
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
-            }
+            } //end else if (actionChoice.equals("Search"))
         }
     }
 
@@ -111,6 +119,15 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+        //More efficient to loop through Hashmap than use job.get
+
+        for (HashMap<String, String> job : someJobs) {
+            System.out.println("*****");
+            for (String i: job.keySet()) { System.out.println(i + ": " + job.get(i)); }
+            System.out.println("*****\n");
+//
+        }
+
+        //System.out.println("printJobs is not implemented yet");
     }
 }
