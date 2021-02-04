@@ -12,7 +12,7 @@ public class TechJobs {
     // Class Variables
     private static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -52,7 +52,7 @@ public class TechJobs {
                     }
                 }
 
-            } else if (actionChoice.equals("search")){ // choice is "search"
+            } else if (actionChoice.equals("search")) { // choice is "search"
 
                 // How does the user want to search (e.g. by skill or employer)
                 String searchField = getUserSelection("Search by:", columnChoices
@@ -61,7 +61,6 @@ public class TechJobs {
                 // What is their search term?
                 System.out.println("\nSearch term: ");
                 String searchTerm = in.nextLine();
-
 
 
                 //if all is selected, the field is not yet set up so it will print ......
@@ -111,7 +110,7 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
@@ -120,14 +119,18 @@ public class TechJobs {
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
         //More efficient to loop through Hashmap than use job.get
+        if (someJobs.isEmpty()) {
+            System.out.println("No jobs found");
+        } else {
+            for (HashMap<String, String> job : someJobs) {
+                System.out.println("*****");
+                for (String i : job.keySet()) {
+                    System.out.println(i + ": " + job.get(i));
+                }
+                System.out.println("*****\n");
+            }
 
-        for (HashMap<String, String> job : someJobs) {
-            System.out.println("*****");
-            for (String i: job.keySet()) { System.out.println(i + ": " + job.get(i)); }
-            System.out.println("*****\n");
-//
+            //System.out.println("printJobs is not implemented yet");
         }
-
-        //System.out.println("printJobs is not implemented yet");
     }
 }
